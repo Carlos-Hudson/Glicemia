@@ -1,0 +1,21 @@
+<AddScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        padding: "20dp"
+
+        MDTopAppBar:
+            title: "Adicionar Glicemia"
+
+        MDTextField:
+            id: glucose_field
+            hint_text: "Digite a glicemia"
+            mode: "rectangle"
+            input_filter: "int"
+
+        MDRaisedButton:
+            text: "Salvar"
+            pos_hint: {"center_x": .5}
+            on_release:
+                root.save_value()

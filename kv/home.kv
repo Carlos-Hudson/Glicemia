@@ -1,0 +1,18 @@
+<HomeScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Controle de Glicemia"
+
+        ScrollView:
+
+            MDList:
+                id: glucose_list
+
+        MDRaisedButton:
+            text: "Adicionar"
+            pos_hint: {"center_x": .5}
+            on_release:
+                app.root.current = "add"
