@@ -3,9 +3,7 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch: # Permite rodar manualmente pelo painel do GitHub
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,29 +11,38 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-python-version: '3.10'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev build-essential libgdbm-dev libnss3-dev libsqlite3-dev libreadline-dev tk-dev libbz2-dev
           pip install --upgrade pip
-          pip install buildozer cython
+          pip install buildozer cython==0.29.33
+
+      - name: Configure Git Safe Directory
+        run: git config --global --add safe.directory /home/runner/work/Glicemia/Glicemia
 
       - name: Build with Buildozer
-        run: buildozer android debug
+        run: |
+          # Aceita licenças e tenta o build
+          yes | buildozer android debug
         env:
-          # Aceita automaticamente as licenças do Android SDK
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: my-app-apk
           path: bin/*.apk
+
       
