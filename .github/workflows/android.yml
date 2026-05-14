@@ -38,3 +38,4 @@ jobs:
         with:
           name: my-app-apk
           path: bin/*.apk
+      
