@@ -20,4 +20,6 @@ android.api = 33
 
 android.minapi = 24
 
+android.build_tools = 34.0.0
+
 android.archs = arm64-v8a
