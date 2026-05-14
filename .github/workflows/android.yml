@@ -1,41 +1,21 @@
-name: Build APK
+name: Android APK
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch: # Permite rodar manualmente pelo painel do GitHub
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Build APK
+        uses: ArtemSBulgakov/buildozer-action@v1
         with:
-          python-python-version: '3.10'
+          command: buildozer android debug
 
-      - name: Install dependencies
-        run: |
-          apt update
-          apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          pip install --upgrade pip
-          pip install buildozer cython
-
-      - name: Build with Buildozer
-        run: buildozer android debug
-        env:
-          # Aceita automaticamente as licenças do Android SDK
-          APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: my-app-apk
+          name: apk
           path: bin/*.apk
-      
