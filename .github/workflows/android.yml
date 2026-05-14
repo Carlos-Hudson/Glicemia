@@ -3,7 +3,9 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Permite rodar manualmente pelo painel do GitHub
 
 jobs:
   build:
@@ -11,40 +13,29 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-python-version: '3.10'
 
-           - name: Install dependencies
+      - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev build-essential
+          sudo apt install  git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
           pip install --upgrade pip
-          # Cython 0.29.33 é OBRIGATÓRIO para evitar o erro 1 que você recebeu
-          pip install "cython<3.0" buildozer
-
-
-      - name: Configure Git Safe Directory
-        run: git config --global --add safe.directory /home/runner/work/Glicemia/Glicemia
+          pip install buildozer cython
 
       - name: Build with Buildozer
-        run: |
-          # Aceita licenças e tenta o build
-          yes | buildozer android debug
+        run: buildozer android debug
         env:
+          # Aceita automaticamente as licenças do Android SDK
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
-          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: my-app-apk
           path: bin/*.apk
-
       
