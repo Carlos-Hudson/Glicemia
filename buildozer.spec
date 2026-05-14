@@ -24,6 +24,6 @@ android.sdk = 31
 
 android.ndk = 26b
 
-android.build_tools = 30.0.3
+android.build_tools = 37.0.0
 
 android.archs = arm64-v8a
