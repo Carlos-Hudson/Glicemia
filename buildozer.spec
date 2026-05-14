@@ -16,6 +16,8 @@ requirements = python3==3.10, kivy==2.2.1, kivymd==1.2.0, pillow, pyjnius, openp
 
 fullscreen = 0
 
+android.sdk_build_tools_revision = 34.0.0
+
 android.api = 31
 
 android.minapi = 21
