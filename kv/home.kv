@@ -2,9 +2,12 @@
 
     MDBoxLayout:
         orientation: "vertical"
+        spacing: "15dp"
+        padding: "15dp"
 
         MDTopAppBar:
             title: "Controle de Glicemia"
+            elevation: 10
 
         ScrollView:
 
@@ -16,3 +19,8 @@
             pos_hint: {"center_x": .5}
             on_release:
                 app.root.current = "add"
+
+        MDRaisedButton:
+            text: "Gerar Relatório"
+            icon: "file-excel-outline"
+            on_release: app.salvar_relatorio()

@@ -11,9 +11,8 @@ source.include_exts = py,kv,png,jpg,ttf
 
 version = 1.0
 
-requirements = python3.11.9,kivy==2.2.1,kivymd==1.2.0
-
-orientation = portrait
+# Adicione 'openpyxl' e 'et_xmlfile' (dependência comum do openpyxl) 
+requirements = python3, kivy==2.2.1, kivymd==1.2.0, pillow, pyjnius, openpyxl, et_xmlfile
 
 fullscreen = 0
 

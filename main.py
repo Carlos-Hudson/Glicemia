@@ -8,9 +8,26 @@ from screens.add import AddScreen
 from screens.settings import SettingsScreen
 
 from utils.theme import setup_theme
-
+import os
+from database.db import connect
+from screens.gerador_path import GeradorPath
+from kivymd.toast import toast
 
 class MainApp(MDApp):
+
+    def on_start(self):
+
+        if not os.path.exists("database"):
+            os.makedirs("database")
+
+        connect()
+        print("Banco de dados criado")
+
+    def salva_relatorio(self):
+        exportador = GeradorPath()
+        resultado = exportador.exportar()
+        toast(resultado)
+
 
     def build(self):
 
