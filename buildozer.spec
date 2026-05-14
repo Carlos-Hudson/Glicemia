@@ -16,10 +16,14 @@ requirements = python3, kivy==2.3.0, kivymd==1.2.0, pillow, pyjnius, openpyxl, e
 
 fullscreen = 0
 
-android.api = 33
+android.api = 31
 
-android.minapi = 24
+android.minapi = 21
 
-android.build_tools = 34.0.0
+android.sdk = 31
+
+android.ndk = 26b
+
+android.build_tools = 30.0.0
 
 android.archs = arm64-v8a
