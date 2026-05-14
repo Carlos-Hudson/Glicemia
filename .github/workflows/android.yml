@@ -21,12 +21,14 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+           - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev build-essential libgdbm-dev libnss3-dev libsqlite3-dev libreadline-dev tk-dev libbz2-dev
+          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev build-essential
           pip install --upgrade pip
-          pip install buildozer cython==0.29.33
+          # Cython 0.29.33 é OBRIGATÓRIO para evitar o erro 1 que você recebeu
+          pip install "cython<3.0" buildozer
+
 
       - name: Configure Git Safe Directory
         run: git config --global --add safe.directory /home/runner/work/Glicemia/Glicemia
