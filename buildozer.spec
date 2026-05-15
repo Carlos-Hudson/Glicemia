@@ -22,7 +22,7 @@ android.api = 33
 
 android.minapi = 21
 
-android.ndk = 25b
+android.ndk_api = 21
 
 android.build_tools = 30.0.3
 
