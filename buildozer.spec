@@ -18,11 +18,9 @@ fullscreen = 0
 
 android.sdk_build_tools_revision = 34.0.0
 
-android.api = 34
+android.api = 33
 
 android.minapi = 21
-
-android.sdk = 34
 
 android.ndk = 25b
 
