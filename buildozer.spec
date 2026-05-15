@@ -12,7 +12,7 @@ source.include_exts = py,kv,png,jpg,ttf
 version = 1.0
 
 # Adicione 'openpyxl' e 'et_xmlfile' (dependência comum do openpyxl) 
-requirements = python3==3.10, kivy==2.2.1, kivymd==1.2.0, pillow, pyjnius, openpyxl, et_xmlfile
+requirements = python3==3.12, kivy==2.2.1, kivymd==1.2.0, pillow, pyjnius, openpyxl, et_xmlfile
 
 fullscreen = 0
 
