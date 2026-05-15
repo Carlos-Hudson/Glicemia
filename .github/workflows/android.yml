@@ -34,5 +34,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
-          name: meu-app-android
+          name: Glicemia
           path: bin/*.apk
